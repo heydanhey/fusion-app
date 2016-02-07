@@ -1,0 +1,9 @@
+<h1>Show Roster</h1>
+
+<p><%= @roster.team_name %> </p>
+
+<p><% @roster.rostered_players.each do |rostered_player| %>
+  <p><%= rostered_player.player.name %> </p>
+<% end %>
+
+

@@ -1,0 +1,2 @@
+class RosteredPlayersController < ApplicationController
+end
