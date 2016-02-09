@@ -5,4 +5,10 @@ class Player < ActiveRecord::Base
   def name_and_team
     name + ", " + team
   end
+
+  def name_and_position_and_team
+    name + ", " + position + ", " + team
+  end
+
+
 end

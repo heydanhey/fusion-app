@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
+  devise_scope :user do
+   authenticated :user do
+     root 'rosters#index', as: :authenticated_root
+   end
+
+   unauthenticated do
+     root 'devise/registrations#new', as: :unauthenticated_root
+   end
+ end
+
+  # root to: "rosters#index"
   get "/rosters" => "rosters#index"
   get "/rosters/new" => "rosters#new"
   post "/rosters" => "rosters#create"

@@ -7,78 +7,73 @@
     <%=form_tag "/rosters/#{@roster.id}", method: :patch do %>
 
       <div class="input-group">
-        <%=label_tag :user_id %>
-        <%=text_field_tag :user_id, nil, class: "form-control" %>
-      </div>
-
-      <div class="input-group">
         <%=label_tag :team_name %>
-        <%=text_field_tag :team_name, nil, class: "form-control" %>
+        <%=text_field_tag :team_name, @roster.team_name, class: "form-control" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "QB 1: " %>
-        <%= collection_select :qb_1, :qb_1_id, Player.where(position: "QB"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :qb_1, :qb_1_id, Player.where(position: "QB"), :id, :name_and_team, selected: @roster.qb_1, prompt: "#{Player.find_by(id: @roster.qb_1).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "QB 2: " %>
-        <%= collection_select :qb_2, :qb_2_id, Player.where(position: "QB"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :qb_2, :qb_2_id, Player.where(position: "QB"), :id, :name_and_team, selected: @roster.qb_2,  prompt: "#{Player.find_by(id: @roster.qb_2).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "RB 1: " %>
-        <%= collection_select :rb_1, :rb_1_id, Player.where(position: "RB"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :rb_1, :rb_1_id, Player.where(position: "RB"), :id, :name_and_team, selected: @roster.rb_1,  prompt: "#{Player.find_by(id: @roster.rb_1).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "RB 2: " %>
-        <%= collection_select :rb_2, :rb_2_id, Player.where(position: "RB"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :rb_2, :rb_2_id, Player.where(position: "RB"), :id, :name_and_team, selected: @roster.rb_2,  prompt: "#{Player.find_by(id: @roster.rb_2).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "RB 3: " %>
-        <%= collection_select :rb_3, :rb_3_id, Player.where(position: "RB"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :rb_3, :rb_3_id, Player.where(position: "RB"), :id, :name_and_team, selected: @roster.rb_3,  prompt: "#{Player.find_by(id: @roster.rb_3).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "WR 1: " %>
-        <%= collection_select :wr_1, :wr_1_id, Player.where(position: "WR"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :wr_1, :wr_1_id, Player.where(position: "WR"), :id, :name_and_team, selected: @roster.wr_1,  prompt: "#{Player.find_by(id: @roster.wr_1).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "WR 2: " %>
-        <%= collection_select :wr_2, :wr_2_id, Player.where(position: "WR"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :wr_2, :wr_2_id, Player.where(position: "WR"), :id, :name_and_team, selected: @roster.wr_2,  prompt: "#{Player.find_by(id: @roster.wr_2).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "WR 3: " %>
-        <%= collection_select :wr_3, :wr_3_id, Player.where(position: "WR"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :wr_3, :wr_3_id, Player.where(position: "WR"), :id, :name_and_team, selected: @roster.wr_3,  prompt: "#{Player.find_by(id: @roster.wr_3).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "TE: " %>
-        <%= collection_select :te_1, :te_1_id, Player.where(position: "TE"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :te_1, :te_1_id, Player.where(position: "TE"), :id, :name_and_team, selected: @roster.te_1,  prompt: "#{Player.find_by(id: @roster.te_1).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "K 1: " %>
-        <%= collection_select :k_1, :k_1_id, Player.where(position: "K"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :k_1, :k_1_id, Player.where(position: "K"), :id, :name_and_team, selected: @roster.k_1,  prompt: "#{Player.find_by(id: @roster.k_1).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "K 1: " %>
-        <%= collection_select :k_2, :k_2_id, Player.where(position: "K"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :k_2, :k_2_id, Player.where(position: "K"), :id, :name_and_team, selected: @roster.k_2,  prompt: "#{Player.find_by(id: @roster.k_2).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "Defense: " %>
-        <%= collection_select :d_1, :d_1_id, Player.where(position: "D"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :d_1, :d_1_id, Player.where(position: "D"), :id, :name_and_team, selected: @roster.d_1,  prompt: "#{Player.find_by(id: @roster.d_1).name}" %>
       </div>
 
       <div class="input-group">
         <%=label_tag "Flex: " %>
-        <%= collection_select :flex_1, :flex_1_id, Player.where(position: "FLEX"), :id, :name_and_team,  prompt: "Please Select" %>
+        <%= collection_select :flex_1, :flex_1_id, Player.where("position = ? OR position = ?", "RB", "WR"), :id, :name_and_position_and_team, selected: @roster.flex_1,  prompt: "#{Player.find_by(id: @roster.flex_1).name}" %>
       </div>
   
       <div>
