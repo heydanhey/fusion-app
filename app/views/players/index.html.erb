@@ -1,0 +1,24 @@
+<h1> All Players </h1>
+
+<table class="table">
+  <tr>
+      <th>NAME</th>
+      <th>TEAM</th>
+      <th>POSITION</th>
+      <th>WEEK 1</th>
+      <th>WEEK 2</th>
+      <th>WEEK 3</th>
+      <th>WEEK 4</th>
+    </tr>
+    <% @players.each do |player| %>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= player.team %></td>
+        <td><%= player.position %></td>
+        <td><%= player.week_1_score %></td>
+        <td><%= player.week_2_score %></td>
+        <td><%= player.week_3_score %></td>
+        <td><%= player.week_4_score %></td>
+    <% end %>
+    </tr>
+  </table>

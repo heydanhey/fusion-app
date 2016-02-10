@@ -1,0 +1,52 @@
+<h1>Edit Player</h1>
+
+<div class="container">
+
+  <div class="form">
+
+    <%=form_tag "/players/#{@player.id}", method: :patch do %>
+
+      <div class="input-group">
+        <%=label_tag :name %>
+        <%=text_field_tag :name, @player.name, class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <%=label_tag :team %>
+        <%=text_field_tag :team, @player.team, class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <%=label_tag :position %>
+        <%=text_field_tag :position, @player.position, class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <%=label_tag :week_1_score %>
+        <%=text_field_tag :week_1_score, @player.week_1_score, class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <%=label_tag :week_2_score %>
+        <%=text_field_tag :week_2_score, @player.week_2_score, class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <%=label_tag :week_3_score %>
+        <%=text_field_tag :week_3_score, @player.week_3_score, class: "form-control" %>
+      </div>
+
+      <div class="input-group">
+        <%=label_tag :week_4_score %>
+        <%=text_field_tag :week_4_score, @player.week_4_score, class: "form-control" %>
+      </div>
+
+      <div>
+        <%= submit_tag "Send", class: "btn btn-default" %>
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>

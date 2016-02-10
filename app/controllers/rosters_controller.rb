@@ -7,7 +7,7 @@ class RostersController < ApplicationController
   end
 
   def create
-    @roster = Roster.new({user_id: current_user.id,
+    @roster = Roster.create({user_id: current_user.id,
                           team_name: params[:team_name],
                           qb_1: params[:qb_1][:qb_1_id],
                           qb_2: params[:qb_2][:qb_2_id],
@@ -37,6 +37,19 @@ class RostersController < ApplicationController
     RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.k_2)
     RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.d_1)
     RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.flex_1)
+
+  #   @rostered_players = RosteredPlayer.where(roster_id: @roster.id)
+
+  #   team_array = ["ARI", "CAR", "CIN", "DEN", "GB", "HOU", "KC", "MIN", "NE", "PIT", "SEA", "WAS"]
+
+  #   @rostered_players.each do |team|
+  #     if team_array.include?(team.player.team) && team.player.position != "FLEX"
+  #       team_array.delete(team.player.team)
+  #     else
+  #       flash[:success] = "Error"
+  #       redirect_to "/rosters"
+  #     end
+  #   end
 
     flash[:success] = "Roster Created"
     redirect_to "/rosters"
