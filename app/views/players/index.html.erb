@@ -12,7 +12,10 @@
     </tr>
     <% @players.each do |player| %>
       <tr>
-        <td><%= player.name %></td>
+        <td><%= player.name %>
+        <% if user_signed_in? && current_user.admin %>
+          <%= link_to "edit", "/players/#{player.id}/edit" %>
+          <% end %></td>
         <td><%= player.team %></td>
         <td><%= player.position %></td>
         <td><%= player.week_1_score %></td>
