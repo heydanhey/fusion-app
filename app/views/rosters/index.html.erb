@@ -1,5 +1,58 @@
-<h1> Roster Index </h1>
-
-<% @rosters.each do |roster| %>
- <p> <%= link_to "#{roster.team_name}", "/rosters/#{roster.id}" %> </p>
+<h1> Your Rosters
+<% if current_user %>
+<%= link_to "New", "/rosters/new", :class => "btn btn-default", :role => "button" %>
 <% end %>
+</h1>
+
+<table class="table">
+  <tr>
+    <th>ROSTER NAME</th>
+    <th>WEEK 1</th>
+    <th>WEEK 2</th>
+    <th>WEEK 3</th>
+    <th>WEEK 4</th>
+    <th>TOTAL</th>
+  </tr>
+
+    <% @my_rosters.each do |my_roster| %>
+    <tr>
+      <td><%= link_to "#{my_roster.team_name}", "/rosters/#{my_roster.id}" %> </td>
+      <td><%= my_roster.week_1_total %> </td>
+      <td><%= my_roster.week_2_total %> </td>
+      <td><%= my_roster.week_3_total %> </td>
+      <td><%= my_roster.week_4_total %> </td>
+      <td><%= my_roster.roster_total %> </td>
+    <% end %>
+    </tr>
+</table>
+
+<h1> All Rosters </h1>
+
+<table class="table">
+  <tr>
+    <th>ROSTER NAME</th>
+    <th>WEEK 1</th>
+    <th>WEEK 2</th>
+    <th>WEEK 3</th>
+    <th>WEEK 4</th>
+    <th>TOTAL</th>
+  </tr>
+
+    <% @rosters.each do |roster| %>
+    <tr>
+      <td><%= link_to "#{roster.team_name}", "/rosters/#{roster.id}" %> </td>
+      <td><%= roster.week_1_total %> </td>
+      <td><%= roster.week_2_total %> </td>
+      <td><%= roster.week_3_total %> </td>
+      <td><%= roster.week_4_total %> </td>
+      <td><%= roster.roster_total %> </td>
+    <% end %>
+    </tr>
+</table>
+
+<% if current_user && current_user.admin %>
+  <h3> Hello Admin! 
+  <%= link_to "Edit Players", "/players", :class => "btn btn-default", :role => "button" %>
+  </h3>
+<% end %>
+

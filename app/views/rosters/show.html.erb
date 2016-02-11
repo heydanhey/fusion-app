@@ -1,9 +1,42 @@
-<h1>Show Roster</h1>
-
-<p><%= @roster.team_name %> </p>
-
-<p><% @roster.rostered_players.each do |rostered_player| %>
-  <p><%= rostered_player.player.name %> </p>
+<h1><%= @roster.team_name %> 
+<% if current_user.id == @roster.user_id %>
+<%= link_to "Edit", "/rosters/#{@roster.id}/edit", :class => "btn btn-default", :role => "button" %>
+<%= link_to "Delete", "/rosters/#{@roster.id}", method: :delete, data:{confirm: "Are You Sure"}, :class => "btn btn-default", :role => "button" %>
 <% end %>
+</h1>
 
+<table class="table">
+  <tr>
+    <th>NAME</th>
+    <th>TEAM</th>
+    <th>POSITION</th>
+    <th>WEEK 1</th>
+    <th>WEEK 2</th>
+    <th>WEEK 3</th>
+    <th>WEEK 4</th>
+    <th>TOTAL</th>
+  </tr>
+  <% @roster.rostered_players.each do |rostered_player| %>
+    <tr>
+      <td><p><%= rostered_player.player.name %></p></td>
+      <td><p><%= rostered_player.player.team %></p></td>
+      <td><p><%= rostered_player.player.position %></p></td>
+      <td><p><%= rostered_player.player.week_1_score %></p></td>
+      <td><p><%= rostered_player.player.week_2_score %></p></td>
+      <td><p><%= rostered_player.player.week_3_score %></p></td>
+      <td><p><%= rostered_player.player.week_4_score %></p></td>
+      <td><p><%= rostered_player.player.total %></p></td>
+  <% end %>
+    </tr>
+    <tr>
+      <td><h2></h2></td>
+      <td></td>
+      <td></td>
+      <td><h3><%= @roster.week_1_total %></h3></td>
+      <td><h3><%= @roster.week_2_total %></h3></td>
+      <td><h3><%= @roster.week_3_total %></h3></td>
+      <td><h3><%= @roster.week_4_total %></h3></td>
+      <td><h3><%= @roster.roster_total %></h3></td>
+    </tr>
 
+</table>

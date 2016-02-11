@@ -1,4 +1,7 @@
 class PlayersController < ApplicationController
+
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy, :index]
+  
   def index
     @players = Player.all
   end

@@ -10,5 +10,9 @@ class Player < ActiveRecord::Base
     name + ", " + position + ", " + team
   end
 
+  def total
+    week_1_score + week_2_score + week_3_score + week_4_score
+  end
+
 
 end

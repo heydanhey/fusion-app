@@ -1,9 +1,11 @@
 class RostersController < ApplicationController
   def index
-    @rosters = Roster.where(user_id: current_user)
+    @my_rosters = Roster.where(user_id: current_user)
+    @rosters = Roster.all
   end
 
   def new
+    @roster = Roster.new
   end
 
   def create
@@ -57,6 +59,7 @@ class RostersController < ApplicationController
 
   def show
     @roster = Roster.find(params[:id])
+    
   end
 
   def edit
