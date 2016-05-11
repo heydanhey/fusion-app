@@ -10,38 +10,50 @@
         $http.get('/api/v1/players.json').then(function(response){
           $scope.players = response.data;
 
-          $scope.roster = {
-            qb_1: "",
-            qb_2: ""
-          };
-
-          $scope.qb = [];
-          $scope.rb = [];
-          $scope.wr = [];
-          $scope.te = [];
-          $scope.k = [];
-          $scope.d = [];
+          $scope.QBs = [];
+          $scope.RBs = [];
+          $scope.WRs = [];
+          $scope.TEs = [];
+          $scope.Ks = [];
+          $scope.Ds = [];
 
           for (var i=0; i<$scope.players.length; i++){
-            $scope.players[i]["isSelected"] = false;
             if ($scope.players[i].position == "QB"){
-              $scope.qb.push($scope.players[i]);
+              $scope.QBs.push($scope.players[i]);
             } else if ($scope.players[i].position == "RB"){
-              $scope.rb.push($scope.players[i]);
+              $scope.RBs.push($scope.players[i]);
             } else if ($scope.players[i].position == "WR"){
-              $scope.wr.push($scope.players[i]);
+              $scope.WRs.push($scope.players[i]);
             } else if ($scope.players[i].position == "TE"){
-              $scope.te.push($scope.players[i]);
+              $scope.TEs.push($scope.players[i]);
             } else if ($scope.players[i].position == "K"){
-              $scope.k.push($scope.players[i]);
+              $scope.Ks.push($scope.players[i]);
             } else if ($scope.players[i].position == "D"){
-              $scope.d.push($scope.players[i]);
+              $scope.Ds.push($scope.players[i]);
             };            
           };
 
+          $scope.rosteredQBs = [{}, {}];
+          $scope.rosteredRBs = [{}, {}, {}];
+          $scope.rosteredWRs = [{}, {}, {}];
 
-        });
-      
+          // $scope.formPlayers = {
+          //   QB: $scope.qb,
+          //   RB: $scope.rb,
+          //   WR: $scope.wr,
+          //   TE: $scope.te,
+          //   K: $scope.k,
+          //   D: $scope.d
+          // };
+          // console.log($scope.formPlayers);
+
+      });
+
+      $scope.isDisabled = function(player, rosteredPlayer, rosteredPlayers) {
+        return (rosteredPlayers.indexOf((player)) !== -1 && rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer));
+      }; 
+
+
     };
 
 
