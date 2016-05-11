@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+    namespace :v1 do
+      get '/players' => 'players#index'
+    end
+  end
+  
   devise_for :users
 
   devise_scope :user do
@@ -10,7 +16,7 @@ Rails.application.routes.draw do
    unauthenticated do
      root 'devise/registrations#new', as: :unauthenticated_root
    end
- end
+  end
 
   # root to: "rosters#index"
   get "/rosters" => "rosters#index"

@@ -2,6 +2,20 @@
 
 <div class="container">
 
+  <div ng-app="app">
+    <div ng-controller="playerCtrl" ng-init="setup()">
+
+      <label>QB 1: 
+        <select ng-model="qb_1" ng-options="player.name disable when player.isSelected for player in qb"></select>
+      </label>
+
+      <label>QB 2: 
+        <select ng-model="qb_2" ng-options="player.name disable when player.isSelected for player in qb"></select>
+      </label>
+  
+    </div>
+  </div>
+
   <div class="form">
 
     <%=form_tag '/rosters', method: :post do %>
