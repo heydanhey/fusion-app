@@ -5,6 +5,8 @@
   <div ng-app="app">
     <div ng-controller="playerCtrl" ng-init="setup()">
 
+      <p>{{activeTeamList}}</p>
+
       <!-- QUARTERBACK SELECTION -->
       <div data-ng-repeat="rosteredPlayer in rosteredQBs">
         <label>QB: </label>
