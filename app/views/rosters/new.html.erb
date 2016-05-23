@@ -5,112 +5,66 @@
   <div ng-app="app">
     <div ng-controller="playerCtrl" ng-init="setup()">
 
-      <p>{{activeTeamList}}</p>
+      <form name="rosterForm" ng-submit="submit(team_name)" novalidate>
 
-      <!-- QUARTERBACK SELECTION -->
-      <div data-ng-repeat="rosteredPlayer in rosteredQBs">
-        <label>QB: </label>
-        <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredQBs) for player in QBs" data-ng-model="rosteredQBs[$index]"></select>
-      </div>
-      <p>{{rosteredQBs}}</p>
+        <label> Roster Name: </label>
+        <input type="text" name="team_name" ng-model="team_name" required>
 
-      <!-- RUNNINGBACK SELECTION -->
-      <div data-ng-repeat="rosteredPlayer in rosteredRBs">
-        <label>RB: </label>
-        <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredRBs) for player in RBs" data-ng-model="rosteredRBs[$index]"></select>
-      </div>
-      <p>{{rosteredRBs}}</p>
+        <p>{{activeTeamList}}</p>
 
-      <!-- WIDERECEIVER SELECTION -->
-      <div data-ng-repeat="rosteredPlayer in rosteredWRs">
-        <label>WR: </label>
-        <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredWRs) for player in WRs" data-ng-model="rosteredWRs[$index]"></select>
-      </div>
-      <p>{{rosteredWRs}}</p>
+        <!-- QUARTERBACK SELECTION -->
+        <div data-ng-repeat="rosteredPlayer in rosteredQBs">
+          <label>QB: </label>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredQBs) for player in QBs" data-ng-model="rosteredQBs[$index]"></select>
+        </div>
+        <p>{{rosteredQBs}}</p>
+
+        <!-- RUNNINGBACK SELECTION -->
+        <div data-ng-repeat="rosteredPlayer in rosteredRBs">
+          <label>RB: </label>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredRBs) for player in RBs" data-ng-model="rosteredRBs[$index]"></select>
+        </div>
+        <p>{{rosteredRBs}}</p>
+
+        <!-- WIDERECEIVER SELECTION -->
+        <div data-ng-repeat="rosteredPlayer in rosteredWRs">
+          <label>WR: </label>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredWRs) for player in WRs" data-ng-model="rosteredWRs[$index]"></select>
+        </div>
+        <p>{{rosteredWRs}}</p>
+
+        <!-- TIGHTEND SELECTION -->
+        <div data-ng-repeat="rosteredPlayer in rosteredTEs">
+          <label>TE: </label>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredTEs) for player in TEs" data-ng-model="rosteredTEs[$index]"></select>
+        </div>
+        <p>{{rosteredTEs}}</p>
+
+        <!-- KICKER SELECTION -->
+        <div data-ng-repeat="rosteredPlayer in rosteredKs">
+          <label>K: </label>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredKs) for player in Ks" data-ng-model="rosteredKs[$index]"></select>
+        </div>
+        <p>{{rosteredKs}}</p>
+
+        <!-- DST SELECTION -->
+        <div data-ng-repeat="rosteredPlayer in rosteredDs">
+          <label>DST: </label>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredDs) for player in Ds" data-ng-model="rosteredDs[$index]"></select>
+        </div>
+        <p>{{rosteredDs}}</p>
+
+        <!-- FLEX SELECTION -->
+        <div data-ng-repeat="rosteredPlayer in rosteredFLEXs">
+          <label>FLEX: </label>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredFLEXs) for player in FLEXs" data-ng-model="rosteredFLEXs[$index]"></select>
+        </div>
+        <p>{{rosteredFLEXs}}</p>
+
+        <button type="submit">Submit</button>
+
+      </form>
 
     </div>
   </div>
-
-  <div class="form">
-
-    <%=form_tag '/rosters', method: :post do %>
-
-      <div class="input-group">
-        <%=label_tag :team_name %>
-        <%=text_field_tag :team_name, nil, class: "form-control" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "QB 1: " %>
-        <%= collection_select :qb_1, :qb_1_id, Player.where(position: "QB"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "QB 2: " %>
-        <%= collection_select :qb_2, :qb_2_id, Player.where(position: "QB"), :id, :name_and_team,  {prompt: "Please Select"}, {:onchange => "alert('hello')" } %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "RB 1: " %>
-        <%= collection_select :rb_1, :rb_1_id, Player.where(position: "RB"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "RB 2: " %>
-        <%= collection_select :rb_2, :rb_2_id, Player.where(position: "RB"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "RB 3: " %>
-        <%= collection_select :rb_3, :rb_3_id, Player.where(position: "RB"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "WR 1: " %>
-        <%= collection_select :wr_1, :wr_1_id, Player.where(position: "WR"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "WR 2: " %>
-        <%= collection_select :wr_2, :wr_2_id, Player.where(position: "WR"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "WR 3: " %>
-        <%= collection_select :wr_3, :wr_3_id, Player.where(position: "WR"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "TE: " %>
-        <%= collection_select :te_1, :te_1_id, Player.where(position: "TE"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "K 1: " %>
-        <%= collection_select :k_1, :k_1_id, Player.where(position: "K"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "K 1: " %>
-        <%= collection_select :k_2, :k_2_id, Player.where(position: "K"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "Defense: " %>
-        <%= collection_select :d_1, :d_1_id, Player.where(position: "D"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-
-      <div class="input-group">
-        <%=label_tag "Flex: " %>
-        <%= collection_select :flex_1, :flex_1_id, Player.where("position = ? OR position = ?", "RB", "WR"), :id, :name_and_team,  prompt: "Please Select" %>
-      </div>
-  
-      <div>
-        <%= submit_tag "Send", class: "btn btn-default" %>
-      </div>
-
-    <% end %>
-
-  </div>
-
 </div>

@@ -13,12 +13,12 @@
 
       <div class="input-group">
         <%=label_tag :team %>
-        <%=text_field_tag :team, nil, class: "form-control" %>
+        <%= select_tag(:team, options_for_select(['ARI', 'CAR', 'CIN', 'DEN', 'GB', 'KC', 'PIT'], selected: @player.team), :prompt => "Select NFL Team", class: "form-control") %>
       </div>
 
       <div class="input-group">
         <%=label_tag :position %>
-        <%=text_field_tag :position, nil, class: "form-control" %>
+        <%= select_tag(:position, options_for_select(['QB', 'RB', 'WR', 'TE', 'K', 'D'], selected: @player.team), :prompt => "Select Player Position", class: "form-control") %>
       </div>
 
       <div>

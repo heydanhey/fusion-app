@@ -1,4 +1,5 @@
 class Api::V1::RostersController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create]
   def index
     @my_rosters = Roster.where(user_id: current_user)
     @rosters = Roster.all
@@ -11,20 +12,21 @@ class Api::V1::RostersController < ApplicationController
   def create
     @roster = Roster.create({user_id: current_user.id,
                           team_name: params[:team_name],
-                          qb_1: params[:qb_1][:qb_1_id],
-                          qb_2: params[:qb_2][:qb_2_id],
-                          rb_1: params[:rb_1][:rb_1_id],
-                          rb_2: params[:rb_2][:rb_2_id],
-                          rb_3: params[:rb_3][:rb_3_id],
-                          wr_1: params[:wr_1][:wr_1_id],
-                          wr_2: params[:wr_2][:wr_2_id],
-                          wr_3: params[:wr_3][:wr_3_id],
-                          te_1: params[:te_1][:te_1_id],
-                          k_1: params[:k_1][:k_1_id],
-                          k_2: params[:k_2][:k_2_id],
-                          d_1: params[:d_1][:d_1_id],
-                          flex_1: params[:flex_1][:flex_1_id]
+                          qb_1: params[:qb_1],
+                          qb_2: params[:qb_2],
+                          rb_1: params[:rb_1],
+                          rb_2: params[:rb_2],
+                          rb_3: params[:rb_3],
+                          wr_1: params[:wr_1],
+                          wr_2: params[:wr_2],
+                          wr_3: params[:wr_3],
+                          te_1: params[:te_1],
+                          k_1: params[:k_1],
+                          k_2: params[:k_2],
+                          d_1: params[:d_1],
+                          flex_1: params[:flex_1]
                           })
+
 
     RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.qb_1)
     RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.qb_2)

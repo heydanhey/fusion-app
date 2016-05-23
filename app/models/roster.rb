@@ -2,8 +2,8 @@ class Roster < ActiveRecord::Base
   has_many :rostered_players
   has_many :players, through: :rostered_palyers
 
-  validates :qb_1, presence: true
-  validates :qb_2, uniqueness: true, if: :check_team
+  # validates :qb_1, presence: true
+  # validates :qb_2, uniqueness: true, if: :check_team
 
   def week_1_total
     total = 0

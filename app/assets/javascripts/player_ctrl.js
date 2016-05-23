@@ -16,17 +16,22 @@
           $scope.TEs = [];
           $scope.Ks = [];
           $scope.Ds = [];
+          $scope.FLEXs = [];
           $scope.activeTeamList = [];
+          $scope.activeRoster = [];
 
           for (var i=0; i<$scope.players.length; i++){
             if ($scope.players[i].position == "QB"){
               $scope.QBs.push($scope.players[i]);
             } else if ($scope.players[i].position == "RB"){
               $scope.RBs.push($scope.players[i]);
+              $scope.FLEXs.push($scope.players[i]);
             } else if ($scope.players[i].position == "WR"){
               $scope.WRs.push($scope.players[i]);
+              $scope.FLEXs.push($scope.players[i]);
             } else if ($scope.players[i].position == "TE"){
               $scope.TEs.push($scope.players[i]);
+              $scope.FLEXs.push($scope.players[i]);
             } else if ($scope.players[i].position == "K"){
               $scope.Ks.push($scope.players[i]);
             } else if ($scope.players[i].position == "D"){
@@ -37,6 +42,10 @@
           $scope.rosteredQBs = [{}, {}];
           $scope.rosteredRBs = [{}, {}, {}];
           $scope.rosteredWRs = [{}, {}, {}];
+          $scope.rosteredTEs = [{}];
+          $scope.rosteredKs = [{}, {}];
+          $scope.rosteredDs = [{}];
+          $scope.rosteredFLEXs = [{}];
 
       });
 
@@ -56,6 +65,10 @@
         $scope.addTeams(scope.rosteredQBs);
         $scope.addTeams(scope.rosteredRBs);
         $scope.addTeams(scope.rosteredWRs);
+        $scope.addTeams(scope.rosteredTEs);
+        $scope.addTeams(scope.rosteredKs);
+        $scope.addTeams(scope.rosteredDs);
+        $scope.addTeams(scope.rosteredFLEXs);
       };
 
       // maybe try doing normal angular filter with group by and disable for collction select?
@@ -72,12 +85,35 @@
           // THIS WILL RETURN TRUE IF EITHER THAT PLAYER OR HIS TEAM HAS ALREADY BEEEN SELECTED BY THE USER
 
           return (rosteredPlayers.indexOf((player)) !== -1 && rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer)) || (rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer) && $scope.activeTeamList.indexOf(player.team) != -1)
-       
       }; 
 
+      $scope.submit = function(team_name){
+
+        var newRoster = {
+          team_name: team_name,
+          qb_1: $scope.rosteredQBs[0].id,
+          qb_2: $scope.rosteredQBs[1].id,
+          rb_1: $scope.rosteredRBs[0].id,
+          rb_2: $scope.rosteredRBs[1].id,
+          rb_3: $scope.rosteredRBs[2].id,
+          wr_1: $scope.rosteredWRs[0].id,
+          wr_2: $scope.rosteredWRs[1].id,
+          wr_3: $scope.rosteredWRs[2].id,
+          te_1: $scope.rosteredTEs[0].id,
+          k_1: $scope.rosteredKs[0].id,
+          k_2: $scope.rosteredKs[1].id,
+          d_1: $scope.rosteredDs[0].id,
+          flex_1: $scope.rosteredFLEXs[0].id
+        };
+        console.log(newRoster);
+
+        $http.post('/api/v1/rosters.json', newRoster).then(function(response){
+          console.log(response.data);
+        });
+        
+      };
 
     };
-
 
   }]);
  
