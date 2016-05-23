@@ -16,6 +16,7 @@
           $scope.TEs = [];
           $scope.Ks = [];
           $scope.Ds = [];
+          $scope.activeTeamList = [];
 
           for (var i=0; i<$scope.players.length; i++){
             if ($scope.players[i].position == "QB"){
@@ -37,20 +38,26 @@
           $scope.rosteredRBs = [{}, {}, {}];
           $scope.rosteredWRs = [{}, {}, {}];
 
-          // $scope.formPlayers = {
-          //   QB: $scope.qb,
-          //   RB: $scope.rb,
-          //   WR: $scope.wr,
-          //   TE: $scope.te,
-          //   K: $scope.k,
-          //   D: $scope.d
-          // };
-          // console.log($scope.formPlayers);
-
       });
 
+      $scope.updateTeamList = function(team){
+        if (team in $scope.activeTeamList) {
+          return true;
+        } else {
+          $scope.activeTeamList.push(team);
+          return false;
+        };
+      }; 
+
       $scope.isDisabled = function(player, rosteredPlayer, rosteredPlayers) {
-        return (rosteredPlayers.indexOf((player)) !== -1 && rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer));
+
+        if (rosteredPlayer.team) {
+          $scope.updateTeamList(rosteredPlayer.team);
+          return false;
+        } else {
+
+          return (rosteredPlayers.indexOf((player)) !== -1 && rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer))
+        }
       }; 
 
 
