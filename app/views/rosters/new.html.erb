@@ -15,49 +15,64 @@
         <!-- QUARTERBACK SELECTION -->
         <div data-ng-repeat="rosteredPlayer in rosteredQBs">
           <label>QB: </label>
-          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredQBs) for player in QBs" data-ng-model="rosteredQBs[$index]"></select>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredQBs) for player in QBs" data-ng-model="rosteredQBs[$index]">
+            <option value="">- select QB -</option>
+          </select>
         </div>
         <p>{{rosteredQBs}}</p>
 
         <!-- RUNNINGBACK SELECTION -->
         <div data-ng-repeat="rosteredPlayer in rosteredRBs">
           <label>RB: </label>
-          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredRBs) for player in RBs" data-ng-model="rosteredRBs[$index]"></select>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredRBs) for player in RBs" data-ng-model="rosteredRBs[$index]">
+            <option value="">- select RB -</option>
+          </select>
         </div>
         <p>{{rosteredRBs}}</p>
 
         <!-- WIDERECEIVER SELECTION -->
         <div data-ng-repeat="rosteredPlayer in rosteredWRs">
           <label>WR: </label>
-          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredWRs) for player in WRs" data-ng-model="rosteredWRs[$index]"></select>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredWRs) for player in WRs" data-ng-model="rosteredWRs[$index]">
+            <option value="">- select WR -</option>
+          </select>
         </div>
         <p>{{rosteredWRs}}</p>
 
         <!-- TIGHTEND SELECTION -->
         <div data-ng-repeat="rosteredPlayer in rosteredTEs">
           <label>TE: </label>
-          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredTEs) for player in TEs" data-ng-model="rosteredTEs[$index]"></select>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredTEs) for player in TEs" data-ng-model="rosteredTEs[$index]">
+            <option value="">- select TE -</option>
+          </select>
         </div>
         <p>{{rosteredTEs}}</p>
 
         <!-- KICKER SELECTION -->
         <div data-ng-repeat="rosteredPlayer in rosteredKs">
           <label>K: </label>
-          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredKs) for player in Ks" data-ng-model="rosteredKs[$index]"></select>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredKs) for player in Ks" data-ng-model="rosteredKs[$index]">
+            <option value="">- select K -</option>
+          </select>
         </div>
         <p>{{rosteredKs}}</p>
 
         <!-- DST SELECTION -->
         <div data-ng-repeat="rosteredPlayer in rosteredDs">
           <label>DST: </label>
-          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredDs) for player in Ds" data-ng-model="rosteredDs[$index]"></select>
+          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredDs) for player in Ds" data-ng-model="rosteredDs[$index]">
+            <option value="">- select DST -</option>
+          </select>
         </div>
         <p>{{rosteredDs}}</p>
 
         <!-- FLEX SELECTION -->
         <div data-ng-repeat="rosteredPlayer in rosteredFLEXs">
           <label>FLEX: </label>
-          <select data-ng-options="player.name disable when isDisabled(player, rosteredPlayer, rosteredFLEXs) for player in FLEXs" data-ng-model="rosteredFLEXs[$index]"></select>
+          <select data-ng-options="player.name disable when isDisabledFlex(player, rosteredPlayer, rosteredFLEXs) for player in FLEXs" data-ng-model="rosteredFLEXs[$index]">
+            <option ng-if="!rosteredFLEXs[0].name" value="">- select FLEX -</option>
+            <option ng-if="rosteredFLEXs[0].name" value="">{{rosteredFLEXs[0].name}}</option>
+          </select>
         </div>
         <p>{{rosteredFLEXs}}</p>
 

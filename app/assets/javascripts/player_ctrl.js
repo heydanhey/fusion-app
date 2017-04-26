@@ -55,6 +55,7 @@
         for (var i=0; i<roster.length; i++){
           if (roster[i].team){
             $scope.activeTeamList.push(roster[i].team);
+            $scope.activeRoster.push(roster[i].name);
           }
         }
       }; 
@@ -62,13 +63,14 @@
       // THIS FUNCTION JUST KEEPS A LIST CURRENT OF THE TEAMS CURRENTLY SELECTED BY A USER
       $scope.updateTeamList = function(team){
         $scope.activeTeamList = [];
-        $scope.addTeams(scope.rosteredQBs);
-        $scope.addTeams(scope.rosteredRBs);
-        $scope.addTeams(scope.rosteredWRs);
-        $scope.addTeams(scope.rosteredTEs);
-        $scope.addTeams(scope.rosteredKs);
-        $scope.addTeams(scope.rosteredDs);
-        $scope.addTeams(scope.rosteredFLEXs);
+        $scope.activeRoster = [];
+        $scope.addTeams($scope.rosteredQBs);
+        $scope.addTeams($scope.rosteredRBs);
+        $scope.addTeams($scope.rosteredWRs);
+        $scope.addTeams($scope.rosteredTEs);
+        $scope.addTeams($scope.rosteredKs);
+        $scope.addTeams($scope.rosteredDs);
+        $scope.addTeams($scope.rosteredFLEXs);
       };
 
       // maybe try doing normal angular filter with group by and disable for collction select?
@@ -77,15 +79,20 @@
 
           // CALL FUNCTION TO ADD THE CURRENTLY SELECTED TEAM
           // THAT WAY  WE CAN DISABLE IF THAT TEAM IS ALREADY SELECTED
-
-          if (rosteredPlayer.team) {
-            $scope.updateTeamList(rosteredPlayer.team);
+          if (rosteredPlayer) {
+            $scope.updateTeamList(rosteredPlayer);
           }
 
           // THIS WILL RETURN TRUE IF EITHER THAT PLAYER OR HIS TEAM HAS ALREADY BEEEN SELECTED BY THE USER
+          return (rosteredPlayers.indexOf((player)) !== -1 && rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer)) || (rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer) && $scope.activeTeamList.indexOf(player.team) != -1 && $scope.activeRoster.includes(player.name))
+      };
 
-          return (rosteredPlayers.indexOf((player)) !== -1 && rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer)) || (rosteredPlayers.indexOf((player)) != rosteredPlayers.indexOf(rosteredPlayer) && $scope.activeTeamList.indexOf(player.team) != -1)
-      }; 
+      $scope.isDisabledFlex = function (player, rosteredPlayer, rosteredPlayers) {
+        if (rosteredPlayer) {
+            $scope.updateTeamList(rosteredPlayer);
+        }
+        return $scope.activeRoster.includes(player.name)
+      } 
 
       $scope.submit = function(team_name){
 

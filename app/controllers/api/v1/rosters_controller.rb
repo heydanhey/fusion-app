@@ -10,7 +10,7 @@ class Api::V1::RostersController < ApplicationController
   end
 
   def create
-    @roster = Roster.create({user_id: current_user.id,
+    @roster = Roster.new({user_id: current_user.id,
                           team_name: params[:team_name],
                           qb_1: params[:qb_1],
                           qb_2: params[:qb_2],
@@ -28,19 +28,21 @@ class Api::V1::RostersController < ApplicationController
                           })
 
 
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.qb_1)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.qb_2)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.rb_1)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.rb_2)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.rb_3)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.wr_1)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.wr_2)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.wr_3)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.te_1)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.k_1)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.k_2)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.d_1)
-    RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.flex_1)
+    if @roster.save
+      
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.qb_1)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.qb_2)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.rb_1)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.rb_2)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.rb_3)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.wr_1)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.wr_2)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.wr_3)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.te_1)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.k_1)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.k_2)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.d_1)
+      RosteredPlayer.create(roster_id: @roster.id, player_id: @roster.flex_1)
 
   #   @rostered_players = RosteredPlayer.where(roster_id: @roster.id)
 
@@ -54,9 +56,12 @@ class Api::V1::RostersController < ApplicationController
   #       redirect_to "/rosters"
   #     end
   #   end
-
-    flash[:success] = "Roster Created"
-    redirect_to "/rosters"
+      flash[:success] = "Roster Created"
+      redirect_to "/rosters"
+    else
+      flash[:warning] = "Error"
+      render 'new'
+    end
   end
 
   def show

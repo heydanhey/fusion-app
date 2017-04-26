@@ -1,7 +1,7 @@
 class RostersController < ApplicationController
   def index
     @my_rosters = Roster.where(user_id: current_user)
-    @rosters = Roster.all
+    @rosters = []
   end
 
   def new
